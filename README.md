@@ -9,7 +9,7 @@ Everyone on the team sees the same data; the app checks for teammates' changes e
 2. In Vercel: **Add New → Project →** import the repo (Vite is auto-detected; no build settings needed).
 3. In the project: **Storage → Create Database → Neon (Postgres)** and connect it to the project.
    This adds `DATABASE_URL` automatically.
-4. **Settings → Environment Variables:** add `APP_ACCESS_CODE` (a long random string; share it with your team).
+4. (Optional) **Settings → Environment Variables:** add `APP_ACCESS_CODE` to require a shared code. Leave it unset for no login at all.
 5. Redeploy. Tables are created automatically on first request.
 
 ## Local development
@@ -31,7 +31,7 @@ Old backups are compatible.
 
 ## Notes
 
-- Access is a single shared code (`APP_ACCESS_CODE`). Fine for a small trusted team; it is not per-user login.
+- If `APP_ACCESS_CODE` is set, everyone needs that shared code (not per-user login). If unset, anyone with the URL has full access.
 - Last write wins: if two people edit the same cell at the same moment, the later save is kept.
 - Request bodies are limited to ~4.5 MB on Vercel (roughly 15–20k students per master list upload).
 - "Clear database" and "Restore" replace data for everyone.

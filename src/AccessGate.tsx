@@ -16,17 +16,13 @@ export default function AccessGate({ children }: { children: React.ReactNode }) 
   const [busy, setBusy] = useState(false);
 
   useEffect(() => {
-    const stored = getAccessCode();
-    if (!stored) {
-      setPhase('locked');
-    } else {
-      verifyAccessCode(stored)
-        .then((ok) => setPhase(ok ? 'open' : 'locked'))
-        .catch((e) => {
-          setError(e?.message || 'Could not reach the server.');
-          setPhase('locked');
-        });
-    }
+    // Always ask the server first: if no code is configured it lets us straight in.
+    verifyAccessCode(getAccessCode())
+      .then((ok) => setPhase(ok ? 'open' : 'locked'))
+      .catch((e) => {
+        setError(e?.message || 'Could not reach the server.');
+        setPhase('locked');
+      });
     const onUnauthorized = () => {
       clearAccessCode();
       setError('Access code was rejected. Please enter it again.');

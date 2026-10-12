@@ -9,14 +9,15 @@ import { createHash, timingSafeEqual } from 'node:crypto';
  *   GET  /api/db?action=backup          -> raw tables for JSON backup
  *   POST /api/db  { op, ...payload }    -> mutations
  *
- * Env vars: DATABASE_URL (Postgres / Neon), APP_ACCESS_CODE (shared team code)
+ * Env vars: DATABASE_URL (Postgres / Neon), APP_ACCESS_CODE (optional shared team code;
+ * if unset, there is no login and anyone with the URL can use the app)
  */
 
 const sha = (s: string) => createHash('sha256').update(s).digest();
 
 function authorized(req: VercelRequest): boolean {
   const expected = process.env.APP_ACCESS_CODE;
-  if (!expected) throw new Error('APP_ACCESS_CODE is not configured on the server.');
+  if (!expected) return true; // no code configured -> app is open to anyone with the URL
   const given = String(req.headers['x-access-code'] ?? '');
   return timingSafeEqual(sha(given), sha(expected));
 }
