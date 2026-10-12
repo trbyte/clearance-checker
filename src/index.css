@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #f6f7f5;
+  --ink: #1d2623;
+  --mut: #5f6b67;
+  --line: #d9dedb;
+  --card: #ffffff;
+  --acc: #1f5f4a;
+  --acc-hover: #174838;
+  --ok: #d8efe0;
+  --okt: #14532d;
+  --bad: #f8d9d6;
+  --badt: #7f1d1d;
+  --warn: #fbeccb;
+  --warnt: #7a4b00;
+  --exc: #dbe7fb;
+  --exct: #1e3a8a;
+  --none: #ececec;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Opaque Solid Status Styling */
+.s-present, .s-cleared {
+  background-color: #d8efe0 !important;
+  color: #14532d !important;
+  border-color: #a3d9b4 !important;
+}
+
+.s-absent, .s-blocked {
+  background-color: #f8d9d6 !important;
+  color: #7f1d1d !important;
+  border-color: #f1b0aa !important;
+}
+
+.s-incomplete {
+  background-color: #fbeccb !important;
+  color: #7a4b00 !important;
+  border-color: #f5d896 !important;
+}
+
+.s-excused {
+  background-color: #dbe7fb !important;
+  color: #1e3a8a !important;
+  border-color: #b3ccf8 !important;
+}
+
+.s-none {
+  background-color: #ececec !important;
+  color: #5f6b67 !important;
+  border-color: #d5d9d7 !important;
+}
+
+/* Clean, Solid, Non-transparent Select Element */
+select.status-select {
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23333333' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 6px center !important;
+  background-size: 11px !important;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 5px;
+  padding: 4px 22px 4px 8px !important;
+  cursor: pointer;
+  outline: none;
+  border-width: 1px;
+  border-style: solid;
+  opacity: 1 !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+select.status-select:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(31, 95, 74, 0.35);
+}
+
+/* Dropdown Options Popup Styling */
+select.status-select option {
+  background-color: #ffffff !important;
+  color: #1d2623 !important;
+  font-weight: 500;
+  padding: 6px 10px;
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
